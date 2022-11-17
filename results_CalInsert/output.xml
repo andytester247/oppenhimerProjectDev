@@ -1,0 +1,1187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.1 (Python 3.11.0 on win32)" generated="20221111 17:45:11.381" rpa="false" schemaversion="3">
+<suite id="s1" name="CalInsert" source="D:\Learn\LearnDoc\TheOppenheimerProject\Tests\CalInsert.robot">
+<test id="s1-t1" name="Calculator insert With valid person details" line="22">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.635" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.635" endtime="20221111 17:45:11.636"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user1_valid_details}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.760" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.760" level="INFO">${response} = {'seconds': 0.119488, 'status': 202, 'reason': '', 'body': 'Alright', 'headers': {'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '7', 'Date': 'Fri, 11 Nov 2022 09:45:11 GMT'}}</msg>
+<status status="PASS" starttime="20221111 17:45:11.636" endtime="20221111 17:45:11.760"/>
+</kw>
+<kw name="assert valid result">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>202</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.761" endtime="20221111 17:45:11.762"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body</arg>
+<arg>Alright</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.762" endtime="20221111 17:45:11.763"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.761" endtime="20221111 17:45:11.763"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user2_valid_details}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.768" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.769" level="INFO">${response} = {'seconds': 0.003876, 'status': 202, 'reason': '', 'body': 'Alright', 'headers': {'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '7', 'Date': 'Fri, 11 Nov 2022 09:45:11 GMT'}}</msg>
+<status status="PASS" starttime="20221111 17:45:11.763" endtime="20221111 17:45:11.769"/>
+</kw>
+<kw name="assert valid result">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>202</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.769" endtime="20221111 17:45:11.770"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body</arg>
+<arg>Alright</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.770" endtime="20221111 17:45:11.770"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.769" endtime="20221111 17:45:11.770"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user3_valid_details}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.776" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.777" level="INFO">${response} = {'seconds': 0.004509, 'status': 202, 'reason': '', 'body': 'Alright', 'headers': {'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '7', 'Date': 'Fri, 11 Nov 2022 09:45:11 GMT'}}</msg>
+<status status="PASS" starttime="20221111 17:45:11.770" endtime="20221111 17:45:11.777"/>
+</kw>
+<kw name="assert valid result">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>202</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.777" endtime="20221111 17:45:11.778"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body</arg>
+<arg>Alright</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.778" endtime="20221111 17:45:11.778"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.777" endtime="20221111 17:45:11.778"/>
+</kw>
+<doc>Should return success when apply calculator insert with valid details
+consist of 3 testcase:
+postive natid value
+negative natid value
+mixchars natid value</doc>
+<status status="PASS" starttime="20221111 17:45:11.635" endtime="20221111 17:45:11.779"/>
+</test>
+<test id="s1-t2" name="Calculator insert with valid person details but different rearrangement" line="36">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.779" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.779" endtime="20221111 17:45:11.779"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user4_diffarrange_details}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.784" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.785" level="INFO">${response} = {'seconds': 0.00352, 'status': 202, 'reason': '', 'body': 'Alright', 'headers': {'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '7', 'Date': 'Fri, 11 Nov 2022 09:45:11 GMT'}}</msg>
+<status status="PASS" starttime="20221111 17:45:11.779" endtime="20221111 17:45:11.785"/>
+</kw>
+<kw name="assert valid result">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>202</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.785" endtime="20221111 17:45:11.785"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body</arg>
+<arg>Alright</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.786" endtime="20221111 17:45:11.786"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.785" endtime="20221111 17:45:11.786"/>
+</kw>
+<doc>Should return success when the details are valid but the different arrangment from the JSON data</doc>
+<status status="PASS" starttime="20221111 17:45:11.779" endtime="20221111 17:45:11.786"/>
+</test>
+<test id="s1-t3" name="Calculator insert With long characters name support" line="42">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.787" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.787" endtime="20221111 17:45:11.787"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user6_longCharSupport_name}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.792" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.793" level="INFO">${response} = {'seconds': 0.003592, 'status': 202, 'reason': '', 'body': 'Alright', 'headers': {'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '7', 'Date': 'Fri, 11 Nov 2022 09:45:11 GMT'}}</msg>
+<status status="PASS" starttime="20221111 17:45:11.787" endtime="20221111 17:45:11.793"/>
+</kw>
+<kw name="assert valid result">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>202</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.793" endtime="20221111 17:45:11.794"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body</arg>
+<arg>Alright</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.794" endtime="20221111 17:45:11.794"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.793" endtime="20221111 17:45:11.795"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.787" endtime="20221111 17:45:11.795"/>
+</test>
+<test id="s1-t4" name="Calculator insert With long characters natid support" line="47">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.795" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.795" endtime="20221111 17:45:11.796"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user7_longCharSupport_natid}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.800" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.801" level="INFO">${response} = {'seconds': 0.0036320000000000002, 'status': 202, 'reason': '', 'body': 'Alright', 'headers': {'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '7', 'Date': 'Fri, 11 Nov 2022 09:45:...</msg>
+<status status="PASS" starttime="20221111 17:45:11.796" endtime="20221111 17:45:11.801"/>
+</kw>
+<kw name="assert valid result">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>202</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.801" endtime="20221111 17:45:11.802"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body</arg>
+<arg>Alright</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.802" endtime="20221111 17:45:11.803"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.801" endtime="20221111 17:45:11.803"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.795" endtime="20221111 17:45:11.803"/>
+</test>
+<test id="s1-t5" name="Calculator insert With missing content: natid" line="53">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.804" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.803" endtime="20221111 17:45:11.804"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_missing_natid}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.834" level="INFO">${response} = {'seconds': 0.029036000000000003, 'status': 500, 'reason': '', 'body': {'timestamp': '2022-11-11T09:45:11.823+0000', 'status': 500, 'error': 'Internal Server Error', 'message': 'could not execute stat...</msg>
+<status status="PASS" starttime="20221111 17:45:11.804" endtime="20221111 17:45:11.834"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.835" endtime="20221111 17:45:11.835"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.835" endtime="20221111 17:45:11.836"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.834" endtime="20221111 17:45:11.836"/>
+</kw>
+<doc>Should return failed when the natid is not part of the JSON data</doc>
+<status status="PASS" starttime="20221111 17:45:11.803" endtime="20221111 17:45:11.836"/>
+</test>
+<test id="s1-t6" name="Calculator insert With missing content: name" line="59">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.837" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.837" endtime="20221111 17:45:11.837"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_missing_name}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.851" level="INFO">${response} = {'seconds': 0.012409, 'status': 500, 'reason': '', 'body': {'timestamp': '2022-11-11T09:45:11.849+0000', 'status': 500, 'error': 'Internal Server Error', 'message': 'could not execute statement; SQL [...</msg>
+<status status="PASS" starttime="20221111 17:45:11.837" endtime="20221111 17:45:11.851"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.851" endtime="20221111 17:45:11.852"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.852" endtime="20221111 17:45:11.853"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.851" endtime="20221111 17:45:11.853"/>
+</kw>
+<doc>Should return failed when the name is not part of the JSON data</doc>
+<status status="PASS" starttime="20221111 17:45:11.837" endtime="20221111 17:45:11.853"/>
+</test>
+<test id="s1-t7" name="Calculator insert With missing content: gender" line="65">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.854" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.854" endtime="20221111 17:45:11.854"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_missing_gender}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.858" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.859" level="INFO">${response} = {'seconds': 0.003388, 'status': 202, 'reason': '', 'body': 'Alright', 'headers': {'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '7', 'Date': 'Fri, 11 Nov 2022 09:45:11 GMT'}}</msg>
+<status status="PASS" starttime="20221111 17:45:11.854" endtime="20221111 17:45:11.859"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<msg timestamp="20221111 17:45:11.860" level="FAIL">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</msg>
+<status status="FAIL" starttime="20221111 17:45:11.860" endtime="20221111 17:45:11.861"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="NOT RUN" starttime="20221111 17:45:11.861" endtime="20221111 17:45:11.861"/>
+</kw>
+<status status="FAIL" starttime="20221111 17:45:11.859" endtime="20221111 17:45:11.861"/>
+</kw>
+<doc>Should return failed when the gender is not part of the JSON data</doc>
+<status status="FAIL" starttime="20221111 17:45:11.853" endtime="20221111 17:45:11.861">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</status>
+</test>
+<test id="s1-t8" name="Calculator insert With missing content: birthday" line="71">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.862" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.862" endtime="20221111 17:45:11.862"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_missing_birthday}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.872" level="INFO">${response} = {'seconds': 0.007988, 'status': 500, 'reason': '', 'body': {'timestamp': '2022-11-11T09:45:11.871+0000', 'status': 500, 'error': 'Internal Server Error', 'message': 'text', 'path': '/calculator/insert...</msg>
+<status status="PASS" starttime="20221111 17:45:11.863" endtime="20221111 17:45:11.872"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.872" endtime="20221111 17:45:11.873"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.873" endtime="20221111 17:45:11.874"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.872" endtime="20221111 17:45:11.874"/>
+</kw>
+<doc>Should return failed when the birthday is not part of the JSON data</doc>
+<status status="PASS" starttime="20221111 17:45:11.862" endtime="20221111 17:45:11.874"/>
+</test>
+<test id="s1-t9" name="Calculator insert With missing content: salary" line="77">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.875" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.875" endtime="20221111 17:45:11.875"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_missing_salary}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.884" level="INFO">${response} = {'seconds': 0.008027, 'status': 500, 'reason': '', 'body': {'timestamp': '2022-11-11T09:45:11.883+0000', 'status': 500, 'error': 'Internal Server Error', 'message': 'Cannot invoke "String.toCharArray(...</msg>
+<status status="PASS" starttime="20221111 17:45:11.875" endtime="20221111 17:45:11.884"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.885" endtime="20221111 17:45:11.885"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.885" endtime="20221111 17:45:11.886"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.884" endtime="20221111 17:45:11.886"/>
+</kw>
+<doc>Should return failed when the salary is not part of the JSON data</doc>
+<status status="PASS" starttime="20221111 17:45:11.874" endtime="20221111 17:45:11.886"/>
+</test>
+<test id="s1-t10" name="Calculator insert With missing content: tax paid" line="83">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.887" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.887" endtime="20221111 17:45:11.887"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_missing_taxpaid}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.896" level="INFO">${response} = {'seconds': 0.007751, 'status': 500, 'reason': '', 'body': {'timestamp': '2022-11-11T09:45:11.895+0000', 'status': 500, 'error': 'Internal Server Error', 'message': 'Cannot invoke "String.toCharArray(...</msg>
+<status status="PASS" starttime="20221111 17:45:11.887" endtime="20221111 17:45:11.896"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.896" endtime="20221111 17:45:11.897"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.897" endtime="20221111 17:45:11.898"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.896" endtime="20221111 17:45:11.898"/>
+</kw>
+<doc>Should return failed when the taxpaid is not part of the JSON data</doc>
+<status status="PASS" starttime="20221111 17:45:11.887" endtime="20221111 17:45:11.898"/>
+</test>
+<test id="s1-t11" name="Calculator insert With empty content: natid" line="89">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.899" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.899" endtime="20221111 17:45:11.899"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_empty_natid}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.903" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.904" level="INFO">${response} = {'seconds': 0.0033410000000000002, 'status': 202, 'reason': '', 'body': 'Alright', 'headers': {'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '7', 'Date': 'Fri, 11 Nov 2022 09:45:...</msg>
+<status status="PASS" starttime="20221111 17:45:11.899" endtime="20221111 17:45:11.904"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<msg timestamp="20221111 17:45:11.905" level="FAIL">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</msg>
+<status status="FAIL" starttime="20221111 17:45:11.904" endtime="20221111 17:45:11.906"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="NOT RUN" starttime="20221111 17:45:11.906" endtime="20221111 17:45:11.906"/>
+</kw>
+<status status="FAIL" starttime="20221111 17:45:11.904" endtime="20221111 17:45:11.906"/>
+</kw>
+<doc>Should return failed when the natid is part of the JSON data but the content is empty</doc>
+<status status="FAIL" starttime="20221111 17:45:11.898" endtime="20221111 17:45:11.906">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</status>
+</test>
+<test id="s1-t12" name="Calculator insert With empty content: name" line="95">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.907" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.907" endtime="20221111 17:45:11.907"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_empty_name}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.912" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.913" level="INFO">${response} = {'seconds': 0.003574, 'status': 202, 'reason': '', 'body': 'Alright', 'headers': {'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '7', 'Date': 'Fri, 11 Nov 2022 09:45:11 GMT'}}</msg>
+<status status="PASS" starttime="20221111 17:45:11.908" endtime="20221111 17:45:11.913"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<msg timestamp="20221111 17:45:11.914" level="FAIL">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</msg>
+<status status="FAIL" starttime="20221111 17:45:11.913" endtime="20221111 17:45:11.914"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="NOT RUN" starttime="20221111 17:45:11.914" endtime="20221111 17:45:11.914"/>
+</kw>
+<status status="FAIL" starttime="20221111 17:45:11.913" endtime="20221111 17:45:11.915"/>
+</kw>
+<doc>Should return failed when the name is part of the JSON data but the content is empty</doc>
+<status status="FAIL" starttime="20221111 17:45:11.907" endtime="20221111 17:45:11.915">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</status>
+</test>
+<test id="s1-t13" name="Calculator insert With empty content: gender" line="101">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.916" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.916" endtime="20221111 17:45:11.916"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_empty_gender}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.920" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.921" level="INFO">${response} = {'seconds': 0.0031379999999999997, 'status': 202, 'reason': '', 'body': 'Alright', 'headers': {'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '7', 'Date': 'Fri, 11 Nov 2022 09:45:...</msg>
+<status status="PASS" starttime="20221111 17:45:11.916" endtime="20221111 17:45:11.921"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<msg timestamp="20221111 17:45:11.922" level="FAIL">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</msg>
+<status status="FAIL" starttime="20221111 17:45:11.921" endtime="20221111 17:45:11.922"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="NOT RUN" starttime="20221111 17:45:11.922" endtime="20221111 17:45:11.922"/>
+</kw>
+<status status="FAIL" starttime="20221111 17:45:11.921" endtime="20221111 17:45:11.923"/>
+</kw>
+<doc>Should return failed when the gender is part of the JSON data but the content is empty</doc>
+<status status="FAIL" starttime="20221111 17:45:11.915" endtime="20221111 17:45:11.923">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</status>
+</test>
+<test id="s1-t14" name="Calculator insert With empty content: birthday" line="107">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.924" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.924" endtime="20221111 17:45:11.924"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_empty_birthday}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.934" level="INFO">${response} = {'seconds': 0.008291, 'status': 500, 'reason': '', 'body': {'timestamp': '2022-11-11T09:45:11.932+0000', 'status': 500, 'error': 'Internal Server Error', 'message': "Text '' could not be parsed at ind...</msg>
+<status status="PASS" starttime="20221111 17:45:11.924" endtime="20221111 17:45:11.934"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.934" endtime="20221111 17:45:11.935"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.935" endtime="20221111 17:45:11.935"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.934" endtime="20221111 17:45:11.935"/>
+</kw>
+<doc>Should return failed when the birthday is part of the JSON data but the content is empty</doc>
+<status status="PASS" starttime="20221111 17:45:11.923" endtime="20221111 17:45:11.936"/>
+</test>
+<test id="s1-t15" name="Calculator insert With empty content: salary" line="113">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.936" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.936" endtime="20221111 17:45:11.936"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_empty_salary}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.947" level="INFO">${response} = {'seconds': 0.008827, 'status': 500, 'reason': '', 'body': {'timestamp': '2022-11-11T09:45:11.946+0000', 'status': 500, 'error': 'Internal Server Error', 'message': 'No message available', 'path': '/c...</msg>
+<status status="PASS" starttime="20221111 17:45:11.937" endtime="20221111 17:45:11.947"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.947" endtime="20221111 17:45:11.948"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.948" endtime="20221111 17:45:11.948"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.947" endtime="20221111 17:45:11.949"/>
+</kw>
+<doc>Should return failed when the salary is part of the JSON data but the content is empty</doc>
+<status status="PASS" starttime="20221111 17:45:11.936" endtime="20221111 17:45:11.949"/>
+</test>
+<test id="s1-t16" name="Calculator insert With empty content: tax paid" line="119">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.950" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.949" endtime="20221111 17:45:11.950"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_empty_taxpaid}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.960" level="INFO">${response} = {'seconds': 0.008933, 'status': 500, 'reason': '', 'body': {'timestamp': '2022-11-11T09:45:11.959+0000', 'status': 500, 'error': 'Internal Server Error', 'message': 'No message available', 'path': '/c...</msg>
+<status status="PASS" starttime="20221111 17:45:11.950" endtime="20221111 17:45:11.960"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.960" endtime="20221111 17:45:11.961"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.961" endtime="20221111 17:45:11.962"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.960" endtime="20221111 17:45:11.962"/>
+</kw>
+<doc>Should return failed when the taxpaid is part of the JSON data but the content is empty</doc>
+<status status="PASS" starttime="20221111 17:45:11.949" endtime="20221111 17:45:11.962"/>
+</test>
+<test id="s1-t17" name="Calculator insert With invalid content: gender non-single characters" line="126">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.963" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.963" endtime="20221111 17:45:11.963"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_nonSingleChar_gender}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.976" level="INFO">${response} = {'seconds': 0.011994, 'status': 500, 'reason': '', 'body': {'timestamp': '2022-11-11T09:45:11.975+0000', 'status': 500, 'error': 'Internal Server Error', 'message': 'could not execute statement; SQL [...</msg>
+<status status="PASS" starttime="20221111 17:45:11.963" endtime="20221111 17:45:11.976"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.977" endtime="20221111 17:45:11.977"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:11.978" endtime="20221111 17:45:11.978"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.977" endtime="20221111 17:45:11.978"/>
+</kw>
+<doc>Should return failed when the gender is invalid with more than 1 character</doc>
+<status status="PASS" starttime="20221111 17:45:11.962" endtime="20221111 17:45:11.978"/>
+</test>
+<test id="s1-t18" name="Calculator insert With invalid content: gender invalid characters" line="132">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.979" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.979" endtime="20221111 17:45:11.979"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_invalidChar_gender}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.984" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.985" level="INFO">${response} = {'seconds': 0.003558, 'status': 202, 'reason': '', 'body': 'Alright', 'headers': {'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '7', 'Date': 'Fri, 11 Nov 2022 09:45:11 GMT'}}</msg>
+<status status="PASS" starttime="20221111 17:45:11.979" endtime="20221111 17:45:11.985"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<msg timestamp="20221111 17:45:11.986" level="FAIL">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</msg>
+<status status="FAIL" starttime="20221111 17:45:11.985" endtime="20221111 17:45:11.986"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="NOT RUN" starttime="20221111 17:45:11.986" endtime="20221111 17:45:11.986"/>
+</kw>
+<status status="FAIL" starttime="20221111 17:45:11.985" endtime="20221111 17:45:11.986"/>
+</kw>
+<doc>Should return failed when the gender is invalid with other character value, other than acceptable "m" or "f"</doc>
+<status status="FAIL" starttime="20221111 17:45:11.979" endtime="20221111 17:45:11.987">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</status>
+</test>
+<test id="s1-t19" name="Calculator insert With invalid content: gender invalid characters big capped" line="138">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.988" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.988" endtime="20221111 17:45:11.988"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_invalidCharbigcapped_gender}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:11.993" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.993" level="INFO">${response} = {'seconds': 0.0035859999999999998, 'status': 202, 'reason': '', 'body': 'Alright', 'headers': {'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '7', 'Date': 'Fri, 11 Nov 2022 09:45:...</msg>
+<status status="PASS" starttime="20221111 17:45:11.988" endtime="20221111 17:45:11.993"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<msg timestamp="20221111 17:45:11.995" level="FAIL">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</msg>
+<status status="FAIL" starttime="20221111 17:45:11.994" endtime="20221111 17:45:11.995"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="NOT RUN" starttime="20221111 17:45:11.995" endtime="20221111 17:45:11.995"/>
+</kw>
+<status status="FAIL" starttime="20221111 17:45:11.994" endtime="20221111 17:45:11.995"/>
+</kw>
+<doc>Should return failed when the gender is invalid with valid character value but in capped</doc>
+<status status="FAIL" starttime="20221111 17:45:11.987" endtime="20221111 17:45:11.995">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</status>
+</test>
+<test id="s1-t20" name="Calculator insert With invalid content: birthday invalid date" line="144">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:11.996" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:11.996" endtime="20221111 17:45:11.996"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_invalidDate_birthday}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:12.006" level="INFO">${response} = {'seconds': 0.008166, 'status': 500, 'reason': '', 'body': {'timestamp': '2022-11-11T09:45:12.005+0000', 'status': 500, 'error': 'Internal Server Error', 'message': "Text '40141980' could not be parse...</msg>
+<status status="PASS" starttime="20221111 17:45:11.997" endtime="20221111 17:45:12.006"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:12.006" endtime="20221111 17:45:12.007"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:12.007" endtime="20221111 17:45:12.008"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:12.006" endtime="20221111 17:45:12.008"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:11.996" endtime="20221111 17:45:12.008"/>
+</test>
+<test id="s1-t21" name="Calculator insert With invalid content: birthday invalid date format" line="149">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:12.009" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:12.009" endtime="20221111 17:45:12.009"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_invalidDateFormat_birthday}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:12.019" level="INFO">${response} = {'seconds': 0.008376, 'status': 500, 'reason': '', 'body': {'timestamp': '2022-11-11T09:45:12.017+0000', 'status': 500, 'error': 'Internal Server Error', 'message': "Text '24DEC1984' could not be pars...</msg>
+<status status="PASS" starttime="20221111 17:45:12.009" endtime="20221111 17:45:12.019"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:12.019" endtime="20221111 17:45:12.020"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:12.020" endtime="20221111 17:45:12.021"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:12.019" endtime="20221111 17:45:12.021"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:12.008" endtime="20221111 17:45:12.021"/>
+</test>
+<test id="s1-t22" name="Calculator insert With invalid content: birthday invalid date negative value" line="154">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:12.022" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:12.022" endtime="20221111 17:45:12.022"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_invalidDateNegValue_birthday}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:12.034" level="INFO">${response} = {'seconds': 0.010541, 'status': 500, 'reason': '', 'body': {'timestamp': '2022-11-11T09:45:12.033+0000', 'status': 500, 'error': 'Internal Server Error', 'message': "Text '-24121984' could not be pars...</msg>
+<status status="PASS" starttime="20221111 17:45:12.023" endtime="20221111 17:45:12.034"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:12.035" endtime="20221111 17:45:12.036"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:12.036" endtime="20221111 17:45:12.037"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:12.035" endtime="20221111 17:45:12.037"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:12.022" endtime="20221111 17:45:12.038"/>
+</test>
+<test id="s1-t23" name="Calculator insert With invalid content: salary invalid negative value" line="159">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:12.039" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:12.039" endtime="20221111 17:45:12.039"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_invalidNegValue_salary}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:12.045" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:12.046" level="INFO">${response} = {'seconds': 0.0044269999999999995, 'status': 202, 'reason': '', 'body': 'Alright', 'headers': {'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '7', 'Date': 'Fri, 11 Nov 2022 09:45:...</msg>
+<status status="PASS" starttime="20221111 17:45:12.039" endtime="20221111 17:45:12.046"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<msg timestamp="20221111 17:45:12.047" level="FAIL">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</msg>
+<status status="FAIL" starttime="20221111 17:45:12.046" endtime="20221111 17:45:12.048"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="NOT RUN" starttime="20221111 17:45:12.048" endtime="20221111 17:45:12.048"/>
+</kw>
+<status status="FAIL" starttime="20221111 17:45:12.046" endtime="20221111 17:45:12.048"/>
+</kw>
+<status status="FAIL" starttime="20221111 17:45:12.038" endtime="20221111 17:45:12.048">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</status>
+</test>
+<test id="s1-t24" name="Calculator insert With invalid content: salary invalid mix letter and number value" line="164">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:12.050" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:12.049" endtime="20221111 17:45:12.050"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_invalidmixValue_salary}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:12.062" level="INFO">${response} = {'seconds': 0.010471999999999999, 'status': 500, 'reason': '', 'body': {'timestamp': '2022-11-11T09:45:12.060+0000', 'status': 500, 'error': 'Internal Server Error', 'message': 'Character S is neither...</msg>
+<status status="PASS" starttime="20221111 17:45:12.050" endtime="20221111 17:45:12.062"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:12.063" endtime="20221111 17:45:12.064"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:12.064" endtime="20221111 17:45:12.065"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:12.062" endtime="20221111 17:45:12.065"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:12.049" endtime="20221111 17:45:12.065"/>
+</test>
+<test id="s1-t25" name="Calculator insert With invalid content: tax Paid invalid negative value" line="169">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:12.067" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:12.066" endtime="20221111 17:45:12.067"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_invalidNegValue_taxPaid}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:12.072" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:12.073" level="INFO">${response} = {'seconds': 0.004070000000000001, 'status': 202, 'reason': '', 'body': 'Alright', 'headers': {'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '7', 'Date': 'Fri, 11 Nov 2022 09:45:1...</msg>
+<status status="PASS" starttime="20221111 17:45:12.067" endtime="20221111 17:45:12.073"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<msg timestamp="20221111 17:45:12.074" level="FAIL">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</msg>
+<status status="FAIL" starttime="20221111 17:45:12.073" endtime="20221111 17:45:12.075"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="NOT RUN" starttime="20221111 17:45:12.075" endtime="20221111 17:45:12.075"/>
+</kw>
+<status status="FAIL" starttime="20221111 17:45:12.073" endtime="20221111 17:45:12.075"/>
+</kw>
+<status status="FAIL" starttime="20221111 17:45:12.066" endtime="20221111 17:45:12.076">202 is not one of [500]
+
+Failed validating 'enum' in schema:
+    {'enum': [500], 'type': 'integer'}
+
+On instance:
+    202</status>
+</test>
+<test id="s1-t26" name="Calculator insert With invalid content: tax Paid invalid letter value" line="174">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:45:12.077" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:45:12.077" endtime="20221111 17:45:12.077"/>
+</kw>
+<kw name="POST" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/insert</arg>
+<arg>${user5_invalidValueLetteronly_taxPaid}</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<msg timestamp="20221111 17:45:12.088" level="INFO">${response} = {'seconds': 0.008797000000000001, 'status': 500, 'reason': '', 'body': {'timestamp': '2022-11-11T09:45:12.087+0000', 'status': 500, 'error': 'Internal Server Error', 'message': 'Character t is neither...</msg>
+<status status="PASS" starttime="20221111 17:45:12.078" endtime="20221111 17:45:12.088"/>
+</kw>
+<kw name="assert Internal Server Error">
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>500</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:45:12.088" endtime="20221111 17:45:12.089"/>
+</kw>
+<kw name="String" library="REST">
+<arg>response body error</arg>
+<arg>Internal Server Error</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON string.*</doc>
+<status status="PASS" starttime="20221111 17:45:12.089" endtime="20221111 17:45:12.090"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:12.088" endtime="20221111 17:45:12.090"/>
+</kw>
+<status status="PASS" starttime="20221111 17:45:12.077" endtime="20221111 17:45:12.091"/>
+</test>
+<status status="FAIL" starttime="20221111 17:45:11.382" endtime="20221111 17:45:12.091"/>
+</suite>
+<statistics>
+<total>
+<stat pass="18" fail="8" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="18" fail="8" skip="0" id="s1" name="CalInsert">CalInsert</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20221111 17:45:11.760" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.768" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.776" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.784" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.792" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.800" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.858" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.903" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.912" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.920" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.984" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:11.993" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:12.045" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+<msg timestamp="20221111 17:45:12.072" level="WARN">Response body content is not JSON. Content-Type is: application/json;charset=UTF-8</msg>
+</errors>
+</robot>

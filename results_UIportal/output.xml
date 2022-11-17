@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.1 (Python 3.11.0 on win32)" generated="20221111 17:06:39.006" rpa="false" schemaversion="3">
+<suite id="s1" name="UIportal" source="D:\Learn\LearnDoc\TheOppenheimerProject\Tests\UIportal.robot">
+<test id="s1-t1" name="Should not able to upload csv success to portal, that has no header" line="14">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${api_url}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20221111 17:06:39.355" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:8080'.</msg>
+<status status="PASS" starttime="20221111 17:06:39.355" endtime="20221111 17:06:40.919"/>
+</kw>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${webelement1}</var>
+<arg>xpath://html/body/div/div[2]/div/div[1]/div[2]/input</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20221111 17:06:40.931" level="INFO">${webelement1} = &lt;selenium.webdriver.remote.webelement.WebElement (session="f89e8c26f9dd3235ad92475fc46fde88", element="70163f03-2e64-4c9b-b23e-bb8667e65887")&gt;</msg>
+<status status="PASS" starttime="20221111 17:06:40.919" endtime="20221111 17:06:40.931"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=multipart/form-data; boundary=YourBoundaryOfChoiceHere</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:06:40.931" level="INFO">${headers} = {'Content-Type': 'multipart/form-data; boundary=YourBoundaryOfChoiceHere'}</msg>
+<status status="PASS" starttime="20221111 17:06:40.931" endtime="20221111 17:06:40.931"/>
+</kw>
+<kw name="Choose File" library="SeleniumLibrary">
+<arg>${webelement1}</arg>
+<arg>D:\\Learn\\LearnDoc\\TheOppenheimerProject\\Tests//listusers_noheader.csv</arg>
+<doc>Inputs the ``file_path`` into the file input field ``locator``.</doc>
+<msg timestamp="20221111 17:06:40.932" level="INFO">Sending D:\Learn\LearnDoc\TheOppenheimerProject\Tests\listusers_noheader.csv to browser.</msg>
+<status status="PASS" starttime="20221111 17:06:40.931" endtime="20221111 17:06:40.946"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:06:40.946" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:06:40.946" endtime="20221111 17:06:40.946"/>
+</kw>
+<kw name="GET" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/taxRelief</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a GET request to the endpoint.*</doc>
+<msg timestamp="20221111 17:06:40.955" level="INFO">${response} = {'seconds': 0.0032559999999999998, 'status': 200, 'reason': '', 'body': [{'natid': '1123$', 'name': 'peter', 'relief': '495.00'}, {'natid': '1123$', 'name': 'peter', 'relief': '495.00'}], 'headers': {...</msg>
+<status status="PASS" starttime="20221111 17:06:40.947" endtime="20221111 17:06:40.955"/>
+</kw>
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>200</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:06:40.955" endtime="20221111 17:06:40.957"/>
+</kw>
+<kw name="Array" library="REST">
+<var>${resArray}</var>
+<arg>response body</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON array.*</doc>
+<msg timestamp="20221111 17:06:40.958" level="INFO">${resArray} = [[{'natid': '1123$', 'name': 'peter', 'relief': '495.00'}, {'natid': '1123$', 'name': 'peter', 'relief': '495.00'}]]</msg>
+<status status="PASS" starttime="20221111 17:06:40.957" endtime="20221111 17:06:40.958"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${targetfield}</var>
+<arg>${resArray}[-1][-1]</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20221111 17:06:40.959" level="INFO">${targetfield} = {'natid': '1123$', 'name': 'peter', 'relief': '495.00'}</msg>
+<status status="PASS" starttime="20221111 17:06:40.958" endtime="20221111 17:06:40.959"/>
+</kw>
+<kw name="Should Not Contain Any" library="BuiltIn">
+<arg>${targetfield}</arg>
+<arg>natid': '1231$$$</arg>
+<doc>Fails if ``container`` contains one or more of the ``*items``.</doc>
+<status status="PASS" starttime="20221111 17:06:40.959" endtime="20221111 17:06:40.959"/>
+</kw>
+<kw name="Should Not Contain Any" library="BuiltIn">
+<arg>${targetfield}</arg>
+<arg>relief': '1123$</arg>
+<doc>Fails if ``container`` contains one or more of the ``*items``.</doc>
+<status status="PASS" starttime="20221111 17:06:40.959" endtime="20221111 17:06:40.959"/>
+</kw>
+<status status="PASS" starttime="20221111 17:06:39.354" endtime="20221111 17:06:40.959"/>
+</test>
+<test id="s1-t2" name="Should able to upload csv file to portal" line="30">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${api_url}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20221111 17:06:40.960" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:8080'.</msg>
+<status status="PASS" starttime="20221111 17:06:40.960" endtime="20221111 17:06:42.243"/>
+</kw>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${webelement1}</var>
+<arg>xpath://html/body/div/div[2]/div/div[1]/div[2]/input</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20221111 17:06:42.253" level="INFO">${webelement1} = &lt;selenium.webdriver.remote.webelement.WebElement (session="e32bb614d2d88a66c32a5bf75031da5c", element="7557a65d-de25-450a-b07d-8de384bf5889")&gt;</msg>
+<status status="PASS" starttime="20221111 17:06:42.243" endtime="20221111 17:06:42.253"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=multipart/form-data; boundary=YourBoundaryOfChoiceHere</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:06:42.253" level="INFO">${headers} = {'Content-Type': 'multipart/form-data; boundary=YourBoundaryOfChoiceHere'}</msg>
+<status status="PASS" starttime="20221111 17:06:42.253" endtime="20221111 17:06:42.253"/>
+</kw>
+<kw name="Choose File" library="SeleniumLibrary">
+<arg>${webelement1}</arg>
+<arg>D:\\Learn\\LearnDoc\\TheOppenheimerProject\\Tests//testfile.csv</arg>
+<doc>Inputs the ``file_path`` into the file input field ``locator``.</doc>
+<msg timestamp="20221111 17:06:42.254" level="INFO">Sending D:\Learn\LearnDoc\TheOppenheimerProject\Tests\testfile.csv to browser.</msg>
+<status status="PASS" starttime="20221111 17:06:42.254" endtime="20221111 17:06:42.269"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221111 17:06:42.269" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20221111 17:06:42.269" endtime="20221111 17:06:42.269"/>
+</kw>
+<kw name="GET" library="REST">
+<var>${response}</var>
+<arg>${api_url}/calculator/taxRelief</arg>
+<arg>headers=&amp;{headers}</arg>
+<tag>http</tag>
+<doc>*Sends a GET request to the endpoint.*</doc>
+<msg timestamp="20221111 17:06:42.274" level="INFO">${response} = {'seconds': 0.00285, 'status': 200, 'reason': '', 'body': [{'natid': '1123$', 'name': 'peter', 'relief': '495.00'}, {'natid': '1123$', 'name': 'peter', 'relief': '495.00'}], 'headers': {'Content-Type'...</msg>
+<status status="PASS" starttime="20221111 17:06:42.270" endtime="20221111 17:06:42.274"/>
+</kw>
+<kw name="Integer" library="REST">
+<arg>response status</arg>
+<arg>200</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON integer.*</doc>
+<status status="PASS" starttime="20221111 17:06:42.274" endtime="20221111 17:06:42.275"/>
+</kw>
+<kw name="Array" library="REST">
+<var>${resArray}</var>
+<arg>response body</arg>
+<tag>assertions</tag>
+<doc>*Asserts the field as JSON array.*</doc>
+<msg timestamp="20221111 17:06:42.276" level="INFO">${resArray} = [[{'natid': '1123$', 'name': 'peter', 'relief': '495.00'}, {'natid': '1123$', 'name': 'peter', 'relief': '495.00'}]]</msg>
+<status status="PASS" starttime="20221111 17:06:42.275" endtime="20221111 17:06:42.276"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${targetfield}</var>
+<arg>${resArray}[-1][-1]</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20221111 17:06:42.277" level="INFO">${targetfield} = {'natid': '1123$', 'name': 'peter', 'relief': '495.00'}</msg>
+<status status="PASS" starttime="20221111 17:06:42.276" endtime="20221111 17:06:42.277"/>
+</kw>
+<kw name="Should Contain Any" library="BuiltIn">
+<arg>${targetfield}</arg>
+<arg>natid': '1123$</arg>
+<doc>Fails if ``container`` does not contain any of the ``*items``.</doc>
+<status status="PASS" starttime="20221111 17:06:42.277" endtime="20221111 17:06:42.277"/>
+</kw>
+<kw name="Should Contain Any" library="BuiltIn">
+<arg>${targetfield}</arg>
+<arg>relief': '495.00</arg>
+<doc>Fails if ``container`` does not contain any of the ``*items``.</doc>
+<status status="PASS" starttime="20221111 17:06:42.277" endtime="20221111 17:06:42.277"/>
+</kw>
+<status status="PASS" starttime="20221111 17:06:40.960" endtime="20221111 17:06:42.277"/>
+</test>
+<test id="s1-t3" name="Should able to dispense tax relief" line="44">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${api_url}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20221111 17:06:42.278" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:8080'.</msg>
+<status status="PASS" starttime="20221111 17:06:42.278" endtime="20221111 17:06:43.755"/>
+</kw>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${webe}</var>
+<arg>xpath://html/body/div/div[2]/div/a[2]</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20221111 17:06:43.766" level="INFO">${webe} = &lt;selenium.webdriver.remote.webelement.WebElement (session="974d23c3b9e4ab3dd878a68a8c9fb545", element="43d9b9b2-0030-43ce-b1d7-9949b5a63b46")&gt;</msg>
+<status status="PASS" starttime="20221111 17:06:43.756" endtime="20221111 17:06:43.766"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${webe}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20221111 17:06:43.767" level="INFO">Clicking button '&lt;selenium.webdriver.remote.webelement.WebElement (session="974d23c3b9e4ab3dd878a68a8c9fb545", element="43d9b9b2-0030-43ce-b1d7-9949b5a63b46")&gt;'.</msg>
+<status status="PASS" starttime="20221111 17:06:43.766" endtime="20221111 17:06:43.912"/>
+</kw>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${cashDispendTxt}</var>
+<arg>xpath://html/body/div/div/div/main/div/div/div</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20221111 17:06:43.919" level="INFO">${cashDispendTxt} = &lt;selenium.webdriver.remote.webelement.WebElement (session="974d23c3b9e4ab3dd878a68a8c9fb545", element="3d1f5fac-ed7d-4f20-a5fa-5cb393a9e787")&gt;</msg>
+<status status="PASS" starttime="20221111 17:06:43.913" endtime="20221111 17:06:43.919"/>
+</kw>
+<kw name="Element Should Contain" library="SeleniumLibrary">
+<arg>${cashDispendTxt}</arg>
+<arg>Cash dispensed</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<msg timestamp="20221111 17:06:43.927" level="INFO">Element '&lt;selenium.webdriver.remote.webelement.WebElement (session="974d23c3b9e4ab3dd878a68a8c9fb545", element="3d1f5fac-ed7d-4f20-a5fa-5cb393a9e787")&gt;' contains text 'Cash dispensed'.</msg>
+<status status="PASS" starttime="20221111 17:06:43.919" endtime="20221111 17:06:43.927"/>
+</kw>
+<status status="PASS" starttime="20221111 17:06:42.278" endtime="20221111 17:06:43.928"/>
+</test>
+<status status="PASS" starttime="20221111 17:06:39.007" endtime="20221111 17:06:43.928"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="3" fail="0" skip="0" id="s1" name="UIportal">UIportal</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
