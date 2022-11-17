@@ -14,10 +14,13 @@
 
 
 # How to run testsuite robot file
-### Please run each robot test suite individually, you may required to re-run OppenheimerProjectDev.jar per each testsuite.
+##### Please run each robot test suite individually, you may required to re-run OppenheimerProjectDev.jar per each testsuite.
 > robot -d results Tests/CalInsert.robot
+
 > robot -d results Tests/CalTaxRelief.robot
+
 > robot -d results Tests/InsertMultipleMasking.robot
+
 > robot -d results Tests/UIportal.robot
 
 # TestResult
