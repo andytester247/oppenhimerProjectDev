@@ -1,4 +1,5 @@
 # users data
+user0_valid_details = {"birthday": "24121984", "gender": "m", "name": "andy", "natid": "1123456", "salary": "4500", "tax": "1200"}
 user1_valid_details = {"birthday": "24121984", "gender": "m", "name": "andy", "natid": "12325", "salary": "4500", "tax": "1200"}
 user2_valid_details = {"birthday": "08051984", "gender": "f", "name": "mandy", "natid": "-12325", "salary": "4800", "tax": "1100"}
 user3_valid_details = {"birthday": "08051984", "gender": "f", "name": "mandy", "natid": "1test1", "salary": "4800", "tax": "1100"}
@@ -33,3 +34,5 @@ array_invalidDetails = [{"gender": "m", "name": "andy", "salary": "1000", "tax":
 array_user0masking = [{"birthday": "24121984", "gender": "m", "name": "andy", "natid": "1234", "salary": "1000", "tax": "80"}]
 array_user1masking = [{"birthday": "24121984", "gender": "m", "name": "andy", "natid": "12345", "salary": "1000", "tax": "80"}]
 array_user2masking = [{"birthday": "24121984", "gender": "m", "name": "andy", "natid": "123456", "salary": "1000", "tax": "80"}]
+array_user3masking = [{"birthday": "24121984", "gender": "m", "name": "andy", "natid": "1234567891234567890", "salary": "1000", "tax": "80"}]
+array_user4masking = [{"birthday": "24121984", "gender": "m", "name": "andy", "natid": "1", "salary": "1000", "tax": "80"}]

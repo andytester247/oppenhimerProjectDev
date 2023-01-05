@@ -1,2 +1,5 @@
 *.png
 OppenhimerProjectDev.jar
+geckodriver-*.log
+__pycache__/*
+Resources/TestData/__pycache__/user.cpython-311.pyc

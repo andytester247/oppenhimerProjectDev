@@ -5,6 +5,8 @@ Library    String
 Library    OperatingSystem
 Variables   ../Resources/TestData/user.py
 
+## TODO Teardown need to test
+Test Teardown    POST         ${api_url}/calculator/rakeDatabase
 *** Variables ***
 ${api_url}=       http://localhost:8080
 
@@ -18,53 +20,31 @@ assert Internal Server Error
     String    response body error   Internal Server Error
 
 *** Test Cases ***
-Calculator insert Multiple With array of valid person details
+US2_TC1: Calculator insert Multiple With array of valid person details
+    [Tags]    Functional    Smoke
     [Documentation]  Test case to insert array
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${response}=    POST  ${api_url}/calculator/insertMultiple  ${array_users}  headers=&{headers}
     assert valid result
 
-Calculator insert Multiple With empty array of valid person details
+US2_TC2: Calculator insert Multiple With empty array of valid person details
+    [Tags]    Functional
     [Documentation]  Test case to insert empty array
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${response}=    POST  ${api_url}/calculator/insertMultiple  []  headers=&{headers}
     assert valid result
-Calculator insert Multiple With array with 2 set of same person details
+US2_TC3: Calculator insert Multiple With array with 2 set of same person details
+    [Tags]    Functional
+    [Documentation]  Test case to insert array, consist 2 sets of same person details
+    ...    Improvement: should do checks if the same details has input or not.
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${response}=    POST  ${api_url}/calculator/insertMultiple  ${array_samedetails}  headers=&{headers}
     assert valid result
-Calculator insert Multiple With array of 1 invalid person details
+US2_TC4: Calculator insert Multiple With array of 1 invalid person details
+    [Tags]    Functional
+    [Documentation]  Test case to insert array with invalid/missing detail
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${response}=    POST  ${api_url}/calculator/insertMultiple  ${array_invalidDetails}  headers=&{headers}
     assert Internal Server Error
 
-Calculator validation tax relief to check natid masking function
-    [documentation]  Should return success with masking from 5th onwards
-    ${headers}=  Create Dictionary  Content-Type=application/json
-
-    # no masking 1st to 4th chars
-    ${response}=    POST  ${api_url}/calculator/insertMultiple  ${array_user0masking}  headers=&{headers}
-    assert valid result
-    ${response}=    GET  ${api_url}/calculator/taxRelief  headers=&{headers}
-    Integer   response status  200
-    ${resArray}=    Array    response body 
-    ${targetfield1}=  Convert To String  ${resArray}[-1][-1]
-    Should Contain Any    ${targetfield1}  'natid': '1234'
-
-    # 5th char masked
-    ${response}=    POST  ${api_url}/calculator/insertMultiple  ${array_user1masking}  headers=&{headers}
-    assert valid result
-    ${response}=    GET  ${api_url}/calculator/taxRelief  headers=&{headers}
-    Integer   response status  200
-    ${resArray}=    Array    response body 
-    ${targetfield1}=  Convert To String  ${resArray}[-1][-1]
-    Should Contain Any    ${targetfield1}  'natid': '1234$'
-
-    # 6th char masked
-    ${response}=    POST  ${api_url}/calculator/insertMultiple  ${array_user2masking}  headers=&{headers}
-    assert valid result
-    ${response}=    GET  ${api_url}/calculator/taxRelief  headers=&{headers}
-    Integer   response status  200
-    ${resArray}=    Array    response body 
-    ${targetfield1}=  Convert To String  ${resArray}[-1][-1]
-    Should Contain Any    ${targetfield1}  'natid': '1234$$'  
+ 
