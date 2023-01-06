@@ -4,7 +4,6 @@ Library    Collections
 Library    String
 Library    OperatingSystem
 Variables   ../Resources/TestData/user.py
-## TODO Teardown need to test
 Test Teardown    POST         ${api_url}/calculator/rakeDatabase
 *** Variables ***
 ${api_url}=       http://localhost:8080

@@ -6,7 +6,6 @@ Library    OperatingSystem
 Library    SeleniumLibrary
 Library    DateTime
 Variables   ../Resources/TestData/user.py
-## TODO Teardown need to test
 Test Teardown    POST         ${api_url}/calculator/rakeDatabase
 *** Variables ***
 ${api_url}=       http://localhost:8080
@@ -27,28 +26,11 @@ calculate birthday with currentDate by age
     ${newbirthday}=     Convert To String    ${newbirthday}
     RETURN     ${newbirthday}
 
-
 calculate tax relief by salary, taxpaid, age and gender
     [Arguments]  ${salary1}  ${taxpaid1}  ${age1}  ${gender1}  ${decimalplace}
     # Log To Console    TESTsalary1:${salary1}
-    # Log To Console    TESTtaxpaid1:${taxpaid1}
-    ${decimalplace}=    Evaluate  ${decimalplace} - 1    
+    # Log To Console    TESTtaxpaid1:${taxpaid1}   
     ${taxrelief}=   Evaluate  ${salary1} - ${taxpaid1}
-    
-    # set to 2 decimal places only
-    Log To Console    TESTtaxrelief:${taxrelief}
-    ${taxrelief}=    Convert To String    ${taxrelief}
-    ${Ptax}=    Evaluate    "${taxrelief}".split(".")
-    Log To Console    TESTTEST-Ptax1:${Ptax[0]}
-    ${Ptax[1]}=    Get Substring    ${Ptax[1]}     0     ${decimalplace}
-    Log To Console    TESTTEST-Ptax2:${Ptax[1]}
-    ${newtaxrelief}=    Catenate  SEPARATOR=.  ${Ptax[0]}  ${Ptax[1]}
-    IF    ${Ptax[1]} < 5
-        ${decimalplace}=    Evaluate  ${decimalplace} - 1
-    END
-    ${taxrelief}=    Convert To Number    ${newtaxrelief}    ${decimalplace}
-    Log To Console    TESTTEST-FINALPtax:${taxrelief}    
-
     IF    0 < ${age1} < 19
         ${taxrelief}=   Evaluate  ${taxrelief}*1
     ELSE IF    18 < ${age1} < 36
@@ -60,13 +42,24 @@ calculate tax relief by salary, taxpaid, age and gender
     ELSE IF    75 < ${age1}
         ${taxrelief}=   Evaluate  ${taxrelief}*0.05
     END
-    # Log To Console    TESTTEST-afterCal-tax:${taxrelief}
-    # ${taxrelief}=    Convert To Number    ${taxrelief}    ${decimalplace}
-    # Log To Console    TESTTEST-afternormalrounding-tax:${taxrelief}
+
+    # set to 2 decimal places only
+    # Log To Console    TESTtaxrelief:${taxrelief}
+    ${taxrelief}=    Convert To String    ${taxrelief}
+    ${Ptax}=    Evaluate    "${taxrelief}".split(".")
+    # convert if there is more than 2 decimal
+    ${len}=    Get Length    ${Ptax[1]} 
+
+    ${taxrelief}=    Convert To Number    ${taxrelief}    ${decimalplace}
+    # Log To Console    After2decimalplacetaxrelief:${taxrelief}
+    # rounding
+    ${taxrelief}=    Evaluate    round($taxrelief)
+
+    Log To Console    After Rounding of xx.50 taxrelief:${taxrelief}
+    
     IF    "${gender1}" == "f"
-        ${taxrelief}=      Evaluate  ${taxrelief}+500
-    ELSE    
-        ${taxrelief}=      Evaluate  ${taxrelief}+0
+        ${taxrelief}=      Evaluate  ${taxrelief}+ 500.00
+        ${taxrelief}=    Convert To Number    ${taxrelief}    2
     END
     IF    0 < ${taxrelief} < 50
         ${taxrelief}=     Set Variable  50
@@ -185,7 +178,6 @@ US4_TC4: Calculator validation tax relief with age: 222
     ${curryear}=        Get Substring    ${currDate}    0  4
     # ${newbirthday}=     calculate birthday with currentDate by age     ${curryear}  ${age}
     # Log To Console    ${newbirthday}
-    # ${response}=    POST  ${api_url}/calculator/insert  {"birthday": "${newbirthday}", "gender": "${gender}", "name": "user", "natid": "11325", "salary": "${salary}", "tax": "${taxpaid}"}  headers=&{headers}
     ${response}=    POST  ${api_url}/calculator/insert  {"birthday": "05011800", "gender": "${gender}", "name": "user", "natid": "11325", "salary": "${salary}", "tax": "${taxpaid}"}  headers=&{headers}
     Integer   response status  202
     ${response}=    GET  ${api_url}/calculator/taxRelief  headers=&{headers}
@@ -280,8 +272,63 @@ US4_TC7: Calculator validation tax relief with tax relief of 2 Decimal place cas
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}
 
+US4_TC8: Calculator validation tax relief with tax relief of 2 Decimal place case3
+    [Tags]    Functional   
+    [Documentation]  Test case on Decimal place and testing rounding
+    ...              To verify the tax relief calculation when Tax paid with 2 decimal place where normal rounding will be applied successfully
+    ...              Bug: the caluclation rounding if xx.50 has not round up.
+    ${headers}=  Create Dictionary  Content-Type=application/json
+    ${age}=       Set Variable    17
+    ${gender}=    Set Variable    m
+    ${salary}=    Set Variable    500.00
+    ${taxpaid}=   Set Variable    399.50
+    ${decimalplace}=    Set Variable    2
 
-US4_TC8: Calculator validation tax relief with tax relief of 3 Decimal place
+    ${currDate}=        Get Current Date
+    ${curryear}=        Get Substring    ${currDate}    0  4
+    ${newbirthday}=     calculate birthday with currentDate by age     ${curryear}  ${age}
+    ${response}=    POST  ${api_url}/calculator/insert  {"birthday": "${newbirthday}", "gender": "${gender}", "name": "user", "natid": "11325", "salary": "${salary}", "tax": "${taxpaid}"}  headers=&{headers}
+    Integer   response status  202
+    ${response}=    GET  ${api_url}/calculator/taxRelief  headers=&{headers}
+    Integer   response status  200
+    ${resArray}=    Array    response body    
+    ${targetfield}=  Convert To String  ${resArray}[-1][-1]
+    Log To Console   ${targetfield}
+    ${salary}=    Convert To Number    ${salary}    ${decimalplace} 
+    ${taxpaid}=   Convert To Number    ${taxpaid}   ${decimalplace}   
+    ${relief}=    calculate tax relief by salary, taxpaid, age and gender  ${salary}  ${taxpaid}  ${age}  ${gender}  ${decimalplace}
+    Log To Console   ${relief}
+    Should Contain Any    ${targetfield}  relief': '${relief}
+
+US4_TC8: Calculator validation tax relief with tax relief of 2 Decimal place case4
+    [Tags]    Functional   
+    [Documentation]  Test case on Decimal place and testing rounding
+    ...              To verify the tax relief calculation when Tax paid with 2 decimal place where normal rounding will be applied successfully
+    ...              Bug: the caluclation rounding if xx.50 has not round up.
+    ${headers}=  Create Dictionary  Content-Type=application/json
+    ${age}=       Set Variable    17
+    ${gender}=    Set Variable    m
+    ${salary}=    Set Variable    500.00
+    ${taxpaid}=   Set Variable    140.341
+    ${decimalplace}=    Set Variable    2
+
+    ${currDate}=        Get Current Date
+    ${curryear}=        Get Substring    ${currDate}    0  4
+    ${newbirthday}=     calculate birthday with currentDate by age     ${curryear}  ${age}
+    ${response}=    POST  ${api_url}/calculator/insert  {"birthday": "${newbirthday}", "gender": "${gender}", "name": "user", "natid": "11325", "salary": "${salary}", "tax": "${taxpaid}"}  headers=&{headers}
+    Integer   response status  202
+    ${response}=    GET  ${api_url}/calculator/taxRelief  headers=&{headers}
+    Integer   response status  200
+    ${resArray}=    Array    response body    
+    ${targetfield}=  Convert To String  ${resArray}[-1][-1]
+    Log To Console   ${targetfield}
+    ${salary}=    Convert To Number    ${salary}    ${decimalplace} 
+    ${taxpaid}=   Convert To Number    ${taxpaid}   ${decimalplace}   
+    ${relief}=    calculate tax relief by salary, taxpaid, age and gender  ${salary}  ${taxpaid}  ${age}  ${gender}  ${decimalplace}
+    Log To Console   ${relief}
+    Should Contain Any    ${targetfield}  relief': '${relief}
+
+US4_TC9: Calculator validation tax relief with tax relief of 3 Decimal place
     [Tags]    Functional   
     [Documentation]  Test case on Decimal place
     ...              To verify the tax relief calculation when Tax paid with 3 decimal place where normal rounding will applied successfully
@@ -290,7 +337,7 @@ US4_TC8: Calculator validation tax relief with tax relief of 3 Decimal place
     ${gender}=    Set Variable    m
     ${salary}=    Set Variable    500.000
     ${taxpaid}=   Set Variable    399.446
-    ${decimalplace}=    Set Variable    3
+    ${decimalplace}=    Set Variable    2
 
     ${currDate}=        Get Current Date
     ${curryear}=        Get Substring    ${currDate}    0  4
@@ -308,7 +355,7 @@ US4_TC8: Calculator validation tax relief with tax relief of 3 Decimal place
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}
 
-US4_TC9: Calculator validation tax relief with age: less than 17
+US4_TC10: Calculator validation tax relief with age: less than 17
     [Tags]    Functional   
     [Documentation]  Test case based on age
     ${headers}=  Create Dictionary  Content-Type=application/json
@@ -334,14 +381,14 @@ US4_TC9: Calculator validation tax relief with age: less than 17
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}
 
-US4_TC10: Calculator validation tax relief with age: 18
+US4_TC11: Calculator validation tax relief with age: 18
     [Tags]    Functional   
     [Documentation]  Test case based on age
     ${headers}=  Create Dictionary  Content-Type=application/json
-    ${age}=       Set Variable    18
+    ${age}=       Set Variable    19
     ${gender}=    Set Variable    m
-    ${salary}=    Set Variable    1000
-    ${taxpaid}=   Set Variable    20
+    ${salary}=    Set Variable    200
+    ${taxpaid}=   Set Variable    10
     ${decimalplace}=    Set Variable    2
 
     ${currDate}=        Get Current Date
@@ -351,7 +398,8 @@ US4_TC10: Calculator validation tax relief with age: 18
     Integer   response status  202
     ${response}=    GET  ${api_url}/calculator/taxRelief  headers=&{headers}
     Integer   response status  200
-    ${resArray}=    Array    response body    
+    ${resArray}=    Array    response body 
+    Log To Console    responseArray::${resArray}   
     ${targetfield}=  Convert To String  ${resArray}[-1][-1]
     Log To Console   ${targetfield}
     ${salary}=    Convert To Number    ${salary}    ${decimalplace} 
@@ -360,7 +408,7 @@ US4_TC10: Calculator validation tax relief with age: 18
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}
 
-US4_TC11: Calculator validation tax relief with age: 19
+US4_TC12: Calculator validation tax relief with age: 19
     [Tags]    Functional   
     [Documentation]  Test case based on age
     ${headers}=  Create Dictionary  Content-Type=application/json
@@ -386,7 +434,7 @@ US4_TC11: Calculator validation tax relief with age: 19
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}
 
-US4_TC12: Calculator validation tax relief with age: 35
+US4_TC13: Calculator validation tax relief with age: 35
     [Tags]    Functional    Smoke
     [Documentation]  Test case based on age
     ${headers}=  Create Dictionary  Content-Type=application/json
@@ -412,7 +460,7 @@ US4_TC12: Calculator validation tax relief with age: 35
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}
 
-US4_TC13: Calculator validation tax relief with age: 36
+US4_TC14: Calculator validation tax relief with age: 36
     [Tags]    Functional   
     [Documentation]  Test case based on age
     ${headers}=  Create Dictionary  Content-Type=application/json
@@ -438,7 +486,7 @@ US4_TC13: Calculator validation tax relief with age: 36
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}
 
-US4_TC14: Calculator validation tax relief with age: 50
+US4_TC15: Calculator validation tax relief with age: 50
     [Tags]    Functional   
     [Documentation]  Test case based on age
     ${headers}=  Create Dictionary  Content-Type=application/json
@@ -464,13 +512,13 @@ US4_TC14: Calculator validation tax relief with age: 50
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}
 
-US4_TC15: Calculator validation tax relief with age: 51
+US4_TC16: Calculator validation tax relief with age: 51
     [Tags]    Functional   
     [Documentation]  Test case based on age
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${age}=       Set Variable    51
     ${gender}=    Set Variable    m
-    ${salary}=    Set Variable    1000
+    ${salary}=    Set Variable    200
     ${taxpaid}=   Set Variable    20
     ${decimalplace}=    Set Variable    2
 
@@ -492,13 +540,13 @@ US4_TC15: Calculator validation tax relief with age: 51
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}
 
-US4_TC16: Calculator validation tax relief with age: 75
+US4_TC17: Calculator validation tax relief with age: 75
     [Tags]    Functional   
     [Documentation]  Test case based on age
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${age}=       Set Variable    75
     ${gender}=    Set Variable    m
-    ${salary}=    Set Variable    1000
+    ${salary}=    Set Variable    200
     ${taxpaid}=   Set Variable    20
     ${decimalplace}=    Set Variable    2
 
@@ -520,7 +568,7 @@ US4_TC16: Calculator validation tax relief with age: 75
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}
 
-US4_TC17: Calculator validation tax relief with age: 76
+US4_TC18: Calculator validation tax relief with age: 76
     [Tags]    Functional   
     [Documentation]  Test case based on age
     ${headers}=  Create Dictionary  Content-Type=application/json
@@ -546,7 +594,7 @@ US4_TC17: Calculator validation tax relief with age: 76
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}
 
-US4_TC18: Calculator validation tax relief with age: 77
+US4_TC19: Calculator validation tax relief with age: 77
     [Tags]    Functional   
     [Documentation]  Test case based on age
     ${headers}=  Create Dictionary  Content-Type=application/json
@@ -572,7 +620,7 @@ US4_TC18: Calculator validation tax relief with age: 77
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}
 
-US4_TC19: Calculator validation tax relief with age: 78
+US4_TC20: Calculator validation tax relief with age: 78
     [Tags]    Functional   
     [Documentation]  Test case based on age
     ${headers}=  Create Dictionary  Content-Type=application/json
@@ -598,13 +646,13 @@ US4_TC19: Calculator validation tax relief with age: 78
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}
 
-US4_TC20: Calculator validation tax relief with age: 17 AND gender female
+US4_TC21: Calculator validation tax relief with age: 17 AND gender female
     [Tags]    Functional   
     [Documentation]  Test case based on age and gender
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${age}=       Set Variable    51
     ${gender}=    Set Variable    f
-    ${salary}=    Set Variable    1000
+    ${salary}=    Set Variable    100
     ${taxpaid}=   Set Variable    20
     ${decimalplace}=    Set Variable    2
 
@@ -624,13 +672,13 @@ US4_TC20: Calculator validation tax relief with age: 17 AND gender female
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}
 
-US4_TC21: Calculator validation tax relief with age: 78 AND gender female
+US4_TC22: Calculator validation tax relief with age: 78 AND gender female
     [Tags]    Functional    Smoke
     [Documentation]  Test case based on age and gender
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${age}=       Set Variable    51
     ${gender}=    Set Variable    f
-    ${salary}=    Set Variable    1000
+    ${salary}=    Set Variable    100
     ${taxpaid}=   Set Variable    20
     ${decimalplace}=    Set Variable    2
 
@@ -650,7 +698,7 @@ US4_TC21: Calculator validation tax relief with age: 78 AND gender female
     Log To Console   ${relief}
     Should Contain Any    ${targetfield}  relief': '${relief}  
 
-US4_TC22: Calculator validation tax relief to check natid masking function
+US4_TC23: Calculator validation tax relief to check natid masking function
     [Tags]    Functional    Smoke
     [documentation]  Bug: Should return success with no masking from 1st natid
     ...              Improvement: single natid character should be allow or new instruction should be added to indiciate the minimum number of characters for natid.
@@ -665,7 +713,7 @@ US4_TC22: Calculator validation tax relief to check natid masking function
     ${targetfield1}=  Convert To String  ${resArray}[-1][-1]
     Should Contain Any    ${targetfield1}  'natid': '1'
 
-US4_TC23: Calculator validation tax relief to check natid masking function
+US4_TC24: Calculator validation tax relief to check natid masking function
     [Tags]    Functional    Smoke
     [documentation]  Should return success with no masking from 1st to 4th characters
     ${headers}=  Create Dictionary  Content-Type=application/json
@@ -679,7 +727,7 @@ US4_TC23: Calculator validation tax relief to check natid masking function
     ${targetfield1}=  Convert To String  ${resArray}[-1][-1]
     Should Contain Any    ${targetfield1}  'natid': '1234'
 
-US4_TC24: Calculator validation tax relief to check natid masking function
+US4_TC25: Calculator validation tax relief to check natid masking function
     [Tags]    Functional    Smoke
     [documentation]  Should return success with masking from 5th onwards
     ${headers}=  Create Dictionary  Content-Type=application/json
@@ -693,7 +741,7 @@ US4_TC24: Calculator validation tax relief to check natid masking function
     ${targetfield1}=  Convert To String  ${resArray}[-1][-1]
     Should Contain Any    ${targetfield1}  'natid': '1234$'
 
-US4_TC25: Calculator validation tax relief to check natid masking function
+US4_TC26: Calculator validation tax relief to check natid masking function
     [Tags]    Functional    Smoke
     [documentation]  Should return success with masking from 5th onwards - 2nd case
     ${headers}=  Create Dictionary  Content-Type=application/json
@@ -707,7 +755,7 @@ US4_TC25: Calculator validation tax relief to check natid masking function
     ${targetfield1}=  Convert To String  ${resArray}[-1][-1]
     Should Contain Any    ${targetfield1}  'natid': '1234$$'
 
-US4_TC26: Calculator validation tax relief to check natid masking function
+US4_TC27: Calculator validation tax relief to check natid masking function
     [Tags]    Functional    Smoke
     [documentation]  Should return success with masking from 5th onwards
     ...    the 5th testcase is to verify that natid masking function should able to support minimum 1 millions number of numberic characters

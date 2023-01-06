@@ -15,13 +15,16 @@
 
 # How to run testsuite robot file
 ##### Please run each robot test suite individually, you may required to re-run OppenheimerProjectDev.jar per each testsuite.
-> robot -d results Tests/CalInsert.robot
+> robot -d results_CalInsert Tests/CalInsert.robot
 
-> robot -d results Tests/CalTaxRelief.robot
+> robot -d results_CalTaxRelief Tests/CalTaxRelief.robot
 
-> robot -d results Tests/InsertMultipleMasking.robot
+> robot -d results_InsertMultipleMasking Tests/InsertMultipleMasking.robot
 
-> robot -d results Tests/UIportal.robot
+> robot -d results_UIportal Tests/UIportal.robot
+
+#### Merge all output into single output.xml
+> rebot -R --xunit mergedoutput.xml results_CalInsert/output.xml results_CalTaxRelief/output.xml results_UIportal/output.xml
 
 # TestResult
 Testsuite has completed, and the results are listed in the following folders:
