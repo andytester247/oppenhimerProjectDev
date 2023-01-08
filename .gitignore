@@ -5,7 +5,8 @@ __pycache__/*
 Resources/TestData/__pycache__/user.cpython-311.pyc
 output
 results
-results_CalInsert
-results_CalTaxRelief
-results_InsertMultipleMasking
-results_UIportal
+results_CalInsert/*
+results_CalTaxRelief/*
+results_InsertMultipleMasking/*
+results_UIportal/*
+results_CalInsert/log.html
