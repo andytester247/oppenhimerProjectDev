@@ -80,6 +80,6 @@ You will able to view
 * 50 Pass
 * 12 Fails
 
-! [AllureResultSnapshot](https://github.com/andytester247/oppenhimerProjectDev/blob/372d7fe5d385d7188a601f392083e4010f6b0286/allure-report/images/2023-01-09%2014_26_43-Allure%20Report.png "Allure Test Result Snapshot")
+![AllureResultSnapshot](https://github.com/andytester247/oppenhimerProjectDev/blob/372d7fe5d385d7188a601f392083e4010f6b0286/allure-report/images/2023-01-09%2014_26_43-Allure%20Report.png "Allure Test Result Snapshot")
 * Refers to BugReports.md to find out more.
 
