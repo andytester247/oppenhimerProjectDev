@@ -74,6 +74,7 @@ US1_TC6: Calculator insert With missing content: name
 US1_TC7: Calculator insert With missing content: gender
     [Tags]    Functional
     [documentation]  Should return failed when the gender is not part of the JSON data
+    ...              Bug: Should failed when the gender is missing 
     ...              Improvement: Checks on missing gender, should be available on API Calculator Insert
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${response}=    POST  ${api_url}/calculator/insert  ${user5_missing_gender}  headers=&{headers}
@@ -162,7 +163,7 @@ US1_TC18: Calculator insert With invalid content: gender invalid characters
 
 US1_TC19: Calculator insert With invalid content: gender invalid characters big capped
     [Tags]    Functional
-    [documentation]  bug: Should return failed when the gender is invalid with valid character value but in capped
+    [documentation]  Bug: Should return failed when the gender is invalid with valid character value but in capped
     ...              Improvement: Checks on Capped gender character, should be available on API Calculator Insert
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${response}=    POST  ${api_url}/calculator/insert  ${user5_invalidCharbigcapped_gender}  headers=&{headers}
@@ -207,6 +208,7 @@ US1_TC24: Calculator insert With invalid content: salary invalid mix letter and 
 US1_TC25: Calculator insert With invalid content: tax Paid invalid negative value
     [Tags]    Functional
     [documentation]  Should return failed when the taxpaid invalid in negative value
+    ...              Bug: Expect error when tax paid is in negative value
     ...              Improvement: Checks on negative value on tax should be available on API Calculator Insert
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${response}=    POST  ${api_url}/calculator/insert  ${user5_invalidNegValue_taxPaid}  headers=&{headers}

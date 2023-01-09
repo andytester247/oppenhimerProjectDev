@@ -218,10 +218,11 @@ US4_TC5: Calculator validation tax relief with age: 17 AND Tax paid and Salary h
     Should Contain Any    ${targetfield}  relief': '${relief}
 
 ## Decimal place
-US4_TC6: Calculator validation tax relief with tax relief of 2 Decimal place
+US4_TC6: Calculator validation tax relief with tax relief of 2 Decimal place case1
     [Tags]    Functional    Smoke
-    [Documentation]  Test case on Decimal place
+    [Documentation]  Test case on Decimal place and normal rounding
     ...              To verify the tax relief calculation when Tax paid with 2 decimal place where normal rounding will not be applied successfully
+    ...              Bug: the api's normal rounding failed to round up.
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${age}=       Set Variable    17
     ${gender}=    Set Variable    m
@@ -247,7 +248,7 @@ US4_TC6: Calculator validation tax relief with tax relief of 2 Decimal place
 
 US4_TC7: Calculator validation tax relief with tax relief of 2 Decimal place case2
     [Tags]    Functional   
-    [Documentation]  Test case on Decimal place
+    [Documentation]  Test case on Decimal place and normal rounding
     ...              To verify the tax relief calculation when Tax paid with 2 decimal place where normal rounding will be applied successfully
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${age}=       Set Variable    17
@@ -274,9 +275,9 @@ US4_TC7: Calculator validation tax relief with tax relief of 2 Decimal place cas
 
 US4_TC8: Calculator validation tax relief with tax relief of 2 Decimal place case3
     [Tags]    Functional   
-    [Documentation]  Test case on Decimal place and testing rounding
+    [Documentation]  Test case on Decimal place and normal rounding
     ...              To verify the tax relief calculation when Tax paid with 2 decimal place where normal rounding will be applied successfully
-    ...              Bug: the caluclation rounding if xx.50 has not round up.
+    ...              Bug: the api's normal rounding failed to round up.
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${age}=       Set Variable    17
     ${gender}=    Set Variable    m
@@ -302,9 +303,9 @@ US4_TC8: Calculator validation tax relief with tax relief of 2 Decimal place cas
 
 US4_TC8: Calculator validation tax relief with tax relief of 2 Decimal place case4
     [Tags]    Functional   
-    [Documentation]  Test case on Decimal place and testing rounding
+    [Documentation]  Test case on Decimal place and normal rounding
     ...              To verify the tax relief calculation when Tax paid with 2 decimal place where normal rounding will be applied successfully
-    ...              Bug: the caluclation rounding if xx.50 has not round up.
+    ...              Bug: the api's normal rounding failed to round up.
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${age}=       Set Variable    17
     ${gender}=    Set Variable    m
@@ -330,8 +331,9 @@ US4_TC8: Calculator validation tax relief with tax relief of 2 Decimal place cas
 
 US4_TC9: Calculator validation tax relief with tax relief of 3 Decimal place
     [Tags]    Functional   
-    [Documentation]  Test case on Decimal place
+    [Documentation]  Test case on Decimal place and normal rounding
     ...              To verify the tax relief calculation when Tax paid with 3 decimal place where normal rounding will applied successfully
+    ...              Bug: the api's normal rounding failed to round up.
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${age}=       Set Variable    17
     ${gender}=    Set Variable    m

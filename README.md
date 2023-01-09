@@ -44,6 +44,14 @@ Python - 3.11.1
 #####  To run all test suite
 > robot -d results Tests/*
 
+##### To run test suite according to specific tag
+> robot -i smoke -d smokeResults ./Tests/* 
+
+##### To run test suite with allure_report generated
+> robot --listener allure_robotframework ./Tests/*
+* You are required to refers to [To install Allure Report] for its prerequistie
+* output folder will be generate for later use. (Please refers to [View generated allure report])
+
 #### Merge all output into single output.xml
 > rebot -R --xunit mergedoutput.xml results_CalInsert/output.xml results_CalTaxRelief/output.xml results_UIportal/output.xml
 
@@ -52,13 +60,26 @@ Testsuite has completed, and the results are listed in the following folders:
 - Results_calInsert, results_CalTaxRelief, results_InsertMultipleMasking, results_UIportal
 - results
 
-# Allure Report
+# Veiw reports using Allure 
+### To install Allure
+Refers to https://docs.qameta.io/allure/#_get_started to install according to your preferred OS.
+Refers to https://docs.qameta.io/allure/ to find out other information
 
-# Generate allure report from the recent run Test
+### View generated Allure report
+> allure serve {root directory}\output\allure
+* refers to [To run test suite with allure_report generated] to generate the reports
+* A Web server will be started to display generated reports
 
-# View allure report
+# View reports without allure_report service
+You will able to view 
+* Refers to [To run all test suite] or [To run each robot test suite individually], where you will able to view the test result from the folder (e.g results or results_CalInsert), by clicking report.html
 
 
+# Test Report
+* 62 Test cases
+* 50 Pass
+* 12 Fails
 
-
+! [alt text](https://github.com/andytester247/oppenhimerProjectDev/allure-report/images/2023-01-09 14_26_43-Allure Report.png "Allure Test Overview")
+* Refers to BugReports.md to find out more.
 
